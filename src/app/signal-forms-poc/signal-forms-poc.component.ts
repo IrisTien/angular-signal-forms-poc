@@ -22,7 +22,7 @@ import {
 } from '@angular/forms/signals';
 import { catchError, delay, lastValueFrom, map, of } from 'rxjs';
 import { PreferencesComponent } from './components/preferences/preferences.component';
-import { User } from './user';
+import { User } from '../model/user';
 import { LocationComponent } from './components/location/location.component';
 
 const nameSchema: Schema<string> = schema((path) => {

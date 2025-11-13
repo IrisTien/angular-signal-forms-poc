@@ -10,7 +10,7 @@ import {
   Validator,
 } from '@angular/forms';
 import { Field, form, required, validate } from '@angular/forms/signals';
-import { Location } from '../../user';
+import { Location } from '../../../model/user';
 
 @Component({
   selector: 'app-location',

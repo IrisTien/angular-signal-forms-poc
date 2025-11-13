@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input, WritableSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Field, FieldTree } from '@angular/forms/signals';
-import { User } from '../../user';
+import { User } from '../../../model/user';
 
 @Component({
   selector: 'app-preferences',

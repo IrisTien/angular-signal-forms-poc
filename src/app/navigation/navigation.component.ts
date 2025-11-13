@@ -12,10 +12,16 @@ import { CommonModule } from '@angular/common';
         <h2>Angular Forms Comparison</h2>
         <div class="nav-links">
           <a 
-            routerLink="/migrate-to-signal" 
+            routerLink="/basic-signal" 
             routerLinkActive="active"
             class="nav-link signal-link">
-            👩🏻‍💻 Migrate To Signal
+            👩🏻‍💻 Basic Signal Form
+          </a>
+          <a 
+            routerLink="/basic-traditional" 
+            routerLinkActive="active"
+            class="nav-link signal-link">
+            🙇 Basic Reactive Traditional Form
           </a>
           <a 
             routerLink="/signal-forms" 

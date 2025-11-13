@@ -7,8 +7,12 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'migrate-to-signal',
-        loadComponent: () => import('./migrate-to-signal/migrate-to-signal.component').then(c => c.MigrateToSignalComponent)
+        path: 'basic-signal',
+        loadComponent: () => import('./basic-signal/basic-signal.component').then(c => c.BasicSignalComponent)
+    },
+    {
+        path: 'basic-traditional',
+        loadComponent: () => import('./migrate-to-signal/basic-traditional.component').then(c => c.BasicTraditionalComponent)
     },
     {
         path: 'signal-forms',

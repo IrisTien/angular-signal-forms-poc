@@ -12,3 +12,7 @@ export interface User {
   preferences: string[];
   locationInfo: Location;
 }
+
+export interface SimpleUser {
+  firstName: string;
+}

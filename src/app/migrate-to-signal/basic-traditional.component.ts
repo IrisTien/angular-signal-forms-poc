@@ -3,16 +3,16 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-migrate-to-signal',
+  selector: 'app-basic-traditional',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './migrate-to-signal.component.html',
-  styleUrls: ['./migrate-to-signal.component.scss'],
+  templateUrl: './basic-traditional.component.html',
+  styleUrls: ['./basic-traditional.component.scss'],
 })
-export class MigrateToSignalComponent {
+export class BasicTraditionalComponent {
   public userForm: FormGroup;
   public isFormValid: boolean = false;
 
