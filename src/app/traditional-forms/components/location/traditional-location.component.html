@@ -1,0 +1,10 @@
+<form [formGroup]="locationForm">
+  <div class="form-group">
+    <label for="location">Location</label>
+    <input [disabled]="isDisabled" id="location" formControlName="location" type="text" placeholder="Enter your location">
+
+    <div class="error-message" *ngIf="hasFieldError('location')">
+      {{ getFieldError('location') }}
+    </div>
+  </div>
+</form>

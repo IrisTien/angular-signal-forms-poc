@@ -1,0 +1,24 @@
+<div class="form-group">
+  <label>Preferences:</label>
+  <div *ngFor="let preference of user()().preferences; let i = index" class="preference-item">
+    <div class="preference-input-item">
+      <input
+        [field]="userForm().preferences[i]"
+        type="text" 
+        placeholder="Enter preference">
+      
+      @for (error of userForm().preferences[i]().errors(); track error) {
+      <div class="error-message">
+        {{ error.message }}
+      </div>
+      }
+    </div>
+    <button type="button" (click)="removePreference(i)" class="remove-btn">Remove</button>
+  </div>
+  @for (error of userForm().preferences().errors(); track error) {
+  <div class="error-message">
+    {{ error.message }}
+  </div>
+  }
+  <button type="button" (click)="addPreference()" class="add-btn">Add Preference</button>
+</div>

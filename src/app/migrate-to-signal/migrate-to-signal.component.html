@@ -1,0 +1,40 @@
+<div class="signal-forms-poc">
+  <h1>Angular Signal Forms</h1>
+
+  <div class="form-container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+      <h2>User Information Form</h2>
+
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" type="text" formControlName="firstName" [class.error]="hasFieldError('firstName')"
+          placeholder="Enter your first name">
+        <div class="error-message" *ngIf="hasFieldError('firstName')">
+          {{ getFieldError('firstName') }}
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">
+          Submit
+        </button>
+      </div>
+    </form>
+
+    <!-- Status Display -->
+    <div class="signal-status">
+      <h3>Form Status</h3>
+      <div class="status-item">
+        <strong>Form Valid:</strong>
+        <span [class]="isFormValid ? 'valid' : 'invalid'">
+          {{ isFormValid ? 'Yes' : 'No' }}
+        </span>
+      </div>
+      <div class="status-item">
+        <strong>Current Form Data:</strong>
+        <pre>{{ userForm.value | json }}</pre>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<div class="signal-forms-poc">
+  <h1>Angular Signal Forms POC</h1>
+  
+  <div class="form-container">
+    <form class="user-form">
+      <h2>User Information Form</h2>
+      
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input 
+          [field]="newUserForm.firstName"
+          id="firstName"
+          type="text"
+          placeholder="Enter your first name">
+        @for (error of newUserForm.firstName().errors(); track error) {
+        <div class="error-message">
+            {{ error.message }}
+        </div>
+        }
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input 
+          [field]="newUserForm.lastName"
+          id="lastName"
+          type="text" 
+          placeholder="Enter your last name">
+        @for (error of newUserForm.lastName().errors(); track error) {
+        <div class="error-message">
+            {{ error.message }}
+        </div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          [field]="newUserForm.email"
+          id="email"
+          type="email" 
+          placeholder="Enter your email">
+        @for (error of newUserForm.email().errors(); track error) {
+        <div class="error-message">
+            {{ error.message }}
+        </div>
+        }
+        @if (newUserForm.email().disabled()) {
+        <div class="error-message">
+          {{ newUserForm.email().disabledReasons() | json}}
+        </div>
+        }
+      </div>
+
+      <!-- Notified by Email -->
+      <div class="form-group email-notification">
+        <input 
+          [field]="newUserForm.notified"
+          id="notified"
+          type="checkbox">
+        <label for="email">Notified by Email</label>
+        @for (error of newUserForm.notified().errors(); track error) {
+        <div class="error-message">
+            {{ error.message }}
+        </div>
+        }
+      </div>
+
+      <!-- Age -->
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input 
+          [field]="newUserForm.age"
+          id="age"
+          type="number" 
+          placeholder="Enter your age">
+        @for (error of newUserForm.age().errors(); track error) {
+        <div class="error-message">
+            {{ error.message }}
+        </div>
+        }
+      </div>
+
+      <!-- Preferences -->
+      <app-preferences [userForm]="newUserForm" [user]="user"></app-preferences>
+
+      <!-- Location -->
+      @if (user().locationInfo) {
+        <app-location [field]="newUserForm.locationInfo"></app-location>
+      }
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button 
+          [disabled]="!newUserForm().valid() || newUserForm().submitting()"
+           (click)="onSubmit()"
+          type="button" 
+          class="submit-btn">
+          {{ newUserForm().submitting() ? 'Submitting...' : 'Submit' }}
+        </button>
+        <button 
+          type="button" 
+          (click)="resetForm()"
+          [disabled]="newUserForm().submitting()"
+          class="reset-btn">
+          Reset
+        </button>
+      </div>
+    </form>
+
+    <!-- Signal Status Display -->
+    <div class="signal-status">
+      <h3>Signal Status</h3>
+      <div class="status-item">
+        <strong>Form Valid:</strong> 
+        <span [class]="newUserForm().valid() ? 'valid' : 'invalid'">
+          {{ newUserForm().valid() ? 'Yes' : 'No' }}
+        </span>
+      </div>
+      <div class="status-item">
+        <strong>Submitting:</strong> 
+        <span [class]="newUserForm().submitting() ? 'submitting' : 'idle'">
+          {{ newUserForm().submitting() ? 'Yes' : 'No' }}
+        </span>
+      </div>
+      <div class="status-item">
+        <strong>Touched:</strong> 
+        <span [class]="newUserForm().touched() ? 'submitting' : 'idle'">
+          {{ newUserForm().touched() ? 'Yes' : 'No' }}
+        </span>
+      </div>
+      <div class="status-item">
+        <strong>Current Form Data:</strong>
+        <pre>{{ user() | json }}</pre>
+      </div>
+    </div>
+  </div>
+</div>

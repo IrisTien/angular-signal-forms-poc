@@ -1,0 +1,131 @@
+<div class="traditional-forms">
+  <h1>Traditional Angular Forms</h1>
+  
+  <div class="form-container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+      <h2>User Information Form (Traditional)</h2>
+      
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input 
+          id="firstName"
+          type="text" 
+          formControlName="firstName"
+          [class.error]="hasFieldError('firstName')"
+          placeholder="Enter your first name">
+        <div class="error-message" *ngIf="hasFieldError('firstName')">
+          {{ getFieldError('firstName') }}
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input 
+          id="lastName"
+          type="text" 
+          formControlName="lastName"
+          [class.error]="hasFieldError('lastName')"
+          placeholder="Enter your last name">
+        <div class="error-message" *ngIf="hasFieldError('lastName')">
+          {{ getFieldError('lastName') }}
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          id="email"
+          type="email" 
+          formControlName="email"
+          [class.error]="hasFieldError('email')"
+          placeholder="Enter your email">
+        <div class="error-message" *ngIf="hasFieldError('email')">
+          {{ getFieldError('email') }}
+        </div>
+      </div>
+
+      <!-- Age -->
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input 
+          id="age"
+          type="number" 
+          formControlName="age"
+          [class.error]="hasFieldError('age')"
+          placeholder="Enter your age">
+        <div class="error-message" *ngIf="hasFieldError('age')">
+          {{ getFieldError('age') }}
+        </div>
+      </div>
+
+      <!-- Preferences -->
+      <div class="form-group">
+        <label>Preferences:</label>
+        <div formArrayName="preferences">
+          <div *ngFor="let preference of preferences.controls; let i = index" class="preference-item">
+            <input 
+              type="text" 
+              [formControlName]="i"
+              placeholder="Enter preference">
+            <button type="button" (click)="removePreference(i)" class="remove-btn">Remove</button>
+          </div>
+        </div>
+        <button type="button" (click)="addPreference()" class="add-btn">Add Preference</button>
+      </div>
+
+      <!-- Traditional Location -->
+      <app-traditional-location formControlName="location"></app-traditional-location>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          [disabled]="!isFormValid || isSubmitting"
+          class="submit-btn">
+          {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+        </button>
+        <button 
+          type="button" 
+          (click)="resetForm()"
+          [disabled]="isSubmitting"
+          class="reset-btn">
+          Reset
+        </button>
+      </div>
+    </form>
+
+    <!-- Traditional Status Display -->
+    <div class="status-display">
+      <h3>Form Status (Traditional)</h3>
+      <div class="status-item">
+        <strong>Form Valid:</strong> 
+        <span [class]="isFormValid ? 'valid' : 'invalid'">
+          {{ isFormValid ? 'Yes' : 'No' }}
+        </span>
+      </div>
+      <div class="status-item">
+        <strong>Submitting:</strong> 
+        <span [class]="isSubmitting ? 'submitting' : 'idle'">
+          {{ isSubmitting ? 'Yes' : 'No' }}
+        </span>
+      </div>
+      <div class="status-item">
+        <strong>Touched:</strong> 
+        <span [class]="userForm.touched ? 'submitting' : 'idle'">
+          {{ userForm.touched ? 'Yes' : 'No' }}
+        </span>
+      </div>
+      <div class="status-item">
+        <strong>Current Form Data:</strong>
+        <pre>{{ formData | json }}</pre>
+      </div>
+      <div class="note">
+        <strong>Note:</strong> This form uses traditional Angular component properties instead of signals. 
+        State updates trigger Angular's change detection cycle.
+      </div>
+    </div>
+  </div>
+</div>

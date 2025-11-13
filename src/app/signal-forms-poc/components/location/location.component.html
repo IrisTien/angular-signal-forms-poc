@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label for="location">Location</label>
+  <input
+    [field]="locationForm.location"
+    id="location"
+    type="text"
+    placeholder="Enter your location">
+    @for (error of locationForm.location().errors(); track error) {
+    <div class="error-message">
+        {{ error.message }}
+    </div>
+    }
+</div>
