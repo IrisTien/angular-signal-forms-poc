@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <nav class="navigation">
       <div class="nav-container">
-        <h2>Angular Forms Comparison</h2>
+        <h2>Angular Forms Demo</h2>
         <div class="nav-links">
           <a 
             routerLink="/basic-signal" 
