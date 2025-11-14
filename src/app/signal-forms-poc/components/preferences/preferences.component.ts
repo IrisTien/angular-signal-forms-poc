@@ -12,7 +12,7 @@ import { User } from '../../../model/user';
   styleUrls: ['./preferences.component.scss'],
 })
 export class PreferencesComponent {
-  userForm = input.required<FieldTree<User, string | number>>();
+  preferencesForm = input.required<FieldTree<string[], string>>();
   user = input.required<WritableSignal<User>>();
 
   onTouched: Function = () => {};
@@ -22,15 +22,14 @@ export class PreferencesComponent {
   addPreference() {
     this.user().set({
       ...this.user()(),
-      preferences: [
-        ...this.user()().preferences,
-        '',
-      ],  
-    })
+      preferences: [...this.user()().preferences, ''],
+    });
   }
 
   removePreference(index: number) {
-    const updatedPreferences = this.user()().preferences.filter((_, i) => i !== index);
+    const updatedPreferences = this.user()().preferences.filter(
+      (_, i) => i !== index
+    );
     this.user().set({
       ...this.user()(),
       preferences: updatedPreferences,

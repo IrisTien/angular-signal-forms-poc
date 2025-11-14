@@ -53,7 +53,7 @@ const commonSchema: Schema<User> = schema<User>((path) => {
   applyEach(path.preferences, (path) => {
     apply(path, nameSchema);
   }),
-  applyEach(path.preferences, (path) => {
+  apply(path.preferences, (path) => {
     debounce(path, 2000);
   }),
   validate(path.preferences, (ctx) => {

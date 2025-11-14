@@ -85,7 +85,7 @@
       </div>
 
       <!-- Preferences -->
-      <app-preferences [userForm]="newUserForm" [user]="user"></app-preferences>
+      <app-preferences [preferencesForm]="newUserForm.preferences" [user]="user"></app-preferences>
 
       <!-- Location Form -->
       <app-location-form class="field-group" [field]="newUserForm.locationData"></app-location-form>
