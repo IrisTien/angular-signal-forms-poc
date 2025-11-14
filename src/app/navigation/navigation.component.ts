@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
           <a 
             routerLink="/basic-traditional" 
             routerLinkActive="active"
-            class="nav-link signal-link">
+            class="nav-link traditional-link">
             🙇 Basic Reactive Traditional Form
           </a>
           <a 
