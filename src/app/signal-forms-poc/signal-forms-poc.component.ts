@@ -6,6 +6,7 @@ import {
   apply,
   applyEach,
   applyWhen,
+  debounce,
   disabled,
   email,
   Field,
@@ -51,6 +52,9 @@ const commonSchema: Schema<User> = schema<User>((path) => {
   min(path.age, 18, { message: 'Age must be at least 18' });
   applyEach(path.preferences, (path) => {
     apply(path, nameSchema);
+  }),
+  applyEach(path.preferences, (path) => {
+    debounce(path, 2000);
   }),
   validate(path.preferences, (ctx) => {
     const preferences = ctx.valueOf(path.preferences);

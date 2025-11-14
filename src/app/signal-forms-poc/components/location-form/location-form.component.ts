@@ -15,8 +15,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./location-form.component.scss'],
 })
 export class LocationFormComponent implements FormValueControl<Location> {
-  private readonly fieldDirective = inject(Field);
-
   readonly value = model<Location>({ city: '', country: '' });
 
   protected get locationField(): FieldTree<Location> {
@@ -30,4 +28,6 @@ export class LocationFormComponent implements FormValueControl<Location> {
   protected get countryField() {
     return this.locationField.country;
   }
+
+  private readonly fieldDirective = inject(Field);
 }
