@@ -1,0 +1,26 @@
+<div class="form-group">
+  <label for="country">Country</label>
+  <input [field]="countryField" id="country" type="text" placeholder="Enter your country">
+  @for (error of countryField().errors(); track error) {
+  <div class="error-message">
+    {{ error.message }}
+  </div>
+  <!-- <div>disabled: {{ countryField().disabled() }}</div> -->
+  }
+</div>
+
+<div class="form-group">
+  <label for="city">City</label>
+  <input [field]="cityField" id="city" type="text" placeholder="Enter your city">
+  @for (error of cityField().errors(); track error) {
+  <div class="error-message">
+    {{ error.message }}
+  </div>
+  }
+  @if (cityField().disabled()) {
+    <div class="error-message">
+      {{ cityField().disabledReasons() | json}}
+    </div>
+  }
+  <!-- <div>disabled: {{ cityField().disabled() }}</div> -->
+</div>

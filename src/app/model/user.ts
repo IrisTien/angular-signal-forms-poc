@@ -1,6 +1,6 @@
-
 export interface Location {
-  location: string;
+  country: string;
+  city: string;
 }
 
 export interface User {
@@ -10,7 +10,7 @@ export interface User {
   notified: boolean;
   age: number;
   preferences: string[];
-  locationInfo: Location;
+  locationData: Location;
 }
 
 export interface SimpleUser {

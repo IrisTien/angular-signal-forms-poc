@@ -1,0 +1,55 @@
+<div class="location-card" [class.disabled]="isDisabled()" [class.pending]="pending()">
+  <header class="location-card__header">
+    <h3 class="location-card__title">Location</h3>
+    @if (required()) {
+      <span class="location-card__badge">Required</span>
+    }
+  </header>
+
+  <div class="field-grid">
+    <label class="field">
+      <span class="field__label">City</span>
+      <input
+        class="field__input"
+        type="text"
+        [field]="cityField"
+        [class.field__input--invalid]="cityField().invalid() && cityField().touched()"
+        placeholder="San Francisco"
+      />
+    </label>
+
+    <label class="field">
+      <span class="field__label">Country</span>
+      <input
+        class="field__input"
+        type="text"
+        [field]="countryField"
+        [class.field__input--invalid]="countryField().invalid() && countryField().touched()"
+        placeholder="United States"
+      />
+    </label>
+  </div>
+
+  <label class="field field--full">
+    <span class="field__label">Postal code</span>
+    <input
+      class="field__input"
+      type="text"
+      [field]="postalCodeField"
+      [class.field__input--invalid]="postalCodeField().invalid() && postalCodeField().touched()"
+      placeholder="94107"
+    />
+  </label>
+
+  @if (showErrors()) {
+    <ul class="errors" role="alert">
+      @for (message of errorMessages(); track message) {
+        <li class="errors__item">{{ message }}</li>
+      }
+    </ul>
+  }
+
+  @if (pending()) {
+    <p class="pending-hint">Running async validation…</p>
+  }
+</div>

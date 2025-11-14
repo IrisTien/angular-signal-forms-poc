@@ -87,10 +87,8 @@
       <!-- Preferences -->
       <app-preferences [userForm]="newUserForm" [user]="user"></app-preferences>
 
-      <!-- Location -->
-      @if (user().locationInfo) {
-        <app-location [field]="newUserForm.locationInfo"></app-location>
-      }
+      <!-- Location Form -->
+      <app-location-form class="field-group" [field]="newUserForm.locationData"></app-location-form>
 
       <!-- Form Actions -->
       <div class="form-actions">

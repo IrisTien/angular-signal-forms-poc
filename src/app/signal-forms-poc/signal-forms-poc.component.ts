@@ -23,7 +23,7 @@ import {
 import { catchError, delay, lastValueFrom, map, of } from 'rxjs';
 import { PreferencesComponent } from './components/preferences/preferences.component';
 import { User } from '../model/user';
-import { LocationComponent } from './components/location/location.component';
+import { LocationFormComponent } from './components/location-form/location-form.component';
 
 const nameSchema: Schema<string> = schema((path) => {
   required(path, { message: 'This field is required' });
@@ -52,29 +52,38 @@ const commonSchema: Schema<User> = schema<User>((path) => {
   applyEach(path.preferences, (path) => {
     apply(path, nameSchema);
   }),
-    validate(path.preferences, (ctx) => {
-      const preferences = ctx.valueOf(path.preferences);
-      if (!preferences || preferences?.length === 0) {
-        return {
-          kind: 'custom',
-          message: 'At least one preference is required',
-        };
-      }
-      return null;
-    }),
-    validateTree(path, (ctx) => {
-      const invalidName =
-        ctx.valueOf(path.firstName) === ctx.valueOf(path.lastName) &&
-        ctx.valueOf(path.firstName) !== '';
-      if (!invalidName) {
-        return null;
-      }
+  validate(path.preferences, (ctx) => {
+    const preferences = ctx.valueOf(path.preferences);
+    if (!preferences || preferences?.length === 0) {
       return {
         kind: 'custom',
-        field: ctx.field.lastName,
-        message: 'First name and last name cannot be the same',
+        message: 'At least one preference is required',
       };
-    });
+    }
+    return null;
+  }),
+  apply(path.locationData, (location) => {
+    required(location.country, { message: 'Country is required' });
+    required(location.city, { message: 'City is required' });
+    disabled(location.city, (ctx) =>
+      ctx.valueOf(location.country) === 'USA'
+        ? 'City is not required for USA'
+        : false
+    );
+  }),
+  validateTree(path, (ctx) => {
+    const invalidName =
+      ctx.valueOf(path.firstName) === ctx.valueOf(path.lastName) &&
+      ctx.valueOf(path.firstName) !== '';
+    if (!invalidName) {
+      return null;
+    }
+    return {
+      kind: 'custom',
+      field: ctx.field.lastName,
+      message: 'First name and last name cannot be the same',
+    };
+  });
   validateAsync(path.email, {
     params: (ctx) => ({
       value: ctx.value(),
@@ -121,7 +130,7 @@ function validateEmailNotInUse(email: string) {
   imports: [
     CommonModule,
     Field,
-    LocationComponent,
+    LocationFormComponent,
     PreferencesComponent,
     ReactiveFormsModule,
   ],
@@ -136,8 +145,9 @@ export class SignalFormsPocComponent {
     notified: false,
     age: 0,
     preferences: [],
-    locationInfo: {
-      location: '',
+    locationData: {
+      country: '',
+      city: '',
     },
   });
 
@@ -178,8 +188,9 @@ export class SignalFormsPocComponent {
       notified: false,
       age: 0,
       preferences: [],
-      locationInfo: {
-        location: '',
+      locationData: {
+        country: '',
+        city: '',
       },
     });
   }
