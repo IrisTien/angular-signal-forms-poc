@@ -8,12 +8,18 @@
       <!-- First Name -->
       <div class="form-group">
         <label for="firstName">First Name:</label>
-        <input id="firstName" type="text" [field]="userForm.firstName" [class.error]="userForm.firstName().errors().length > 0"
+        <input
+          [field]="userForm.firstName"
+          [class.error]="userForm.firstName().touched() && userForm.firstName().errors().length > 0"
+          id="firstName"
+          type="text"
           placeholder="Enter your first name">
+        @if (userForm.firstName().touched()) {
         @for (error of userForm.firstName().errors(); track error) {
         <div class="error-message">
-            {{ error.message }}
+          {{ error.message }}
         </div>
+        }
         }
       </div>
 

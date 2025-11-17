@@ -6,13 +6,17 @@ export const routes: Routes = [
         redirectTo: '/signal-forms',
         pathMatch: 'full'
     },
+    // {
+    //     path: 'basic-signal',
+    //     loadComponent: () => import('./basic-signal/basic-signal.component').then(c => c.BasicSignalComponent)
+    // },
     {
         path: 'basic-signal',
-        loadComponent: () => import('./basic-signal/basic-signal.component').then(c => c.BasicSignalComponent)
+        loadComponent: () => import('./convert-to-signal/convert-to-signal.component').then(c => c.ConvertToSingalComponent)
     },
     {
         path: 'basic-traditional',
-        loadComponent: () => import('./migrate-to-signal/basic-traditional.component').then(c => c.BasicTraditionalComponent)
+        loadComponent: () => import('./basic-traditional/basic-traditional.component').then(c => c.BasicTraditionalComponent)
     },
     {
         path: 'signal-forms',

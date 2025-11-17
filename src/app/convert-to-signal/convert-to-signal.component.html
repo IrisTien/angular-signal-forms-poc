@@ -1,0 +1,31 @@
+<div class="traditional-forms">
+  <h1>Angular Signal Forms</h1>
+
+  <div class="form-container">
+    <form class="user-form">
+      <h2>User Information Form</h2>
+
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input
+          id="firstName"
+          type="text"
+          placeholder="Enter your first name">
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="submit-btn" (click)="onSubmit()">
+          Submit
+        </button>
+      </div>
+    </form>
+  
+    <div class="status-display">
+        <h3>Form Status</h3>
+        <div class="status-item">
+          <!-- <pre>{{ userForm().value() | json }}</pre> -->
+        </div>
+    </div>
+  </div>
+</div>
