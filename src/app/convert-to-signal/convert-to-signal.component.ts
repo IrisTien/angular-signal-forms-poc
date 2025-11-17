@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SimpleUser } from '../model/user';
+import { form, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-convert-to-signal',
@@ -14,6 +16,5 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class ConvertToSingalComponent {
   onSubmit() {
-    
   }
 }

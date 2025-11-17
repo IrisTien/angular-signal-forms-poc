@@ -1,4 +1,4 @@
-.traditional-forms {
+.signal-forms-poc {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -22,16 +22,15 @@
 }
 
 .user-form {
-  background: #f5f5f5;
+  background: #f9f9f9;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #ff6b35;
 
   h2 {
     margin-top: 0;
     color: #333;
-    border-bottom: 2px solid #ff6b35;
+    border-bottom: 2px solid #007acc;
     padding-bottom: 10px;
   }
 }
@@ -56,7 +55,7 @@
 
     &:focus {
       outline: none;
-      border-color: #ff6b35;
+      border-color: #007acc;
     }
 
     &.error {
@@ -68,6 +67,14 @@
     color: #e74c3c;
     font-size: 14px;
     margin-top: 5px;
+  }
+}
+
+.email-notification {
+  display: flex;
+  align-items: center;
+  input {
+    width: auto;
   }
 }
 
@@ -131,11 +138,11 @@
   }
 
   .submit-btn {
-    background: #ff6b35;
+    background: #007acc;
     color: white;
 
     &:hover:not(:disabled) {
-      background: #e55a2b;
+      background: #005a99;
     }
   }
 
@@ -149,17 +156,16 @@
   }
 }
 
-.status-display {
+.signal-status {
   background: #fff;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #ff6b35;
 
   h3 {
     margin-top: 0;
     color: #333;
-    border-bottom: 2px solid #ff6b35;
+    border-bottom: 2px solid #28a745;
     padding-bottom: 10px;
   }
 
@@ -193,23 +199,10 @@
       background: #f8f9fa;
       padding: 10px;
       border-radius: 4px;
-      border-left: 4px solid #ff6b35;
+      border-left: 4px solid #007acc;
       margin-top: 10px;
       font-size: 12px;
       overflow-x: auto;
-    }
-  }
-
-  .note {
-    margin-top: 20px;
-    padding: 15px;
-    background: #fff3cd;
-    border: 1px solid #ffeaa7;
-    border-radius: 4px;
-    color: #856404;
-    
-    strong {
-      color: #856404;
     }
   }
 }

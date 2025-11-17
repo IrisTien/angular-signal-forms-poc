@@ -1,4 +1,4 @@
-<div class="traditional-forms">
+<div class="signal-forms-poc">
   <h1>Angular Signal Forms</h1>
 
   <div class="form-container">
@@ -21,11 +21,17 @@
       </div>
     </form>
   
-    <div class="status-display">
+    <div class="signal-status">
         <h3>Form Status</h3>
-        <div class="status-item">
-          <!-- <pre>{{ userForm().value() | json }}</pre> -->
+        <!-- <div class="status-item">
+          <strong>Form Valid:</strong>
+          <span [class]="userForm().valid() ? 'valid' : 'invalid'">
+            {{ userForm().valid() ? 'Yes' : 'No' }}
+          </span>
         </div>
+        <div class="status-item">
+          <pre>{{ userForm().value() | json }}</pre>
+        </div> -->
     </div>
   </div>
 </div>
