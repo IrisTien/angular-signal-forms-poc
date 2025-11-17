@@ -1,6 +1,11 @@
 <div class="form-group">
   <label for="country">Country</label>
-  <input [field]="countryField" id="country" type="text" placeholder="Enter your country">
+  <input
+    [field]="countryField"
+    id="country"
+    type="text"
+    placeholder="Enter your country"
+  >
   @for (error of countryField().errors(); track error) {
   <div class="error-message">
     {{ error.message }}
@@ -11,7 +16,12 @@
 
 <div class="form-group">
   <label for="city">City</label>
-  <input [field]="cityField" id="city" type="text" placeholder="Enter your city">
+  <input
+    [field]="cityField"
+    id="city"
+    type="text"
+    placeholder="Enter your city"
+  >
   @for (error of cityField().errors(); track error) {
   <div class="error-message">
     {{ error.message }}

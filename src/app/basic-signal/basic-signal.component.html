@@ -2,7 +2,7 @@
   <h1>Angular Signal Forms</h1>
 
   <div class="form-container">
-    <form class="user-form">
+    <form (submit)="onSubmit($event)" class="user-form">
       <h2>User Information Form</h2>
 
       <!-- First Name -->
@@ -24,7 +24,7 @@
       </div>
 
       <div class="form-actions">
-        <button type="button" class="submit-btn" (click)="onSubmit()">
+        <button type="submit" class="submit-btn">
           Submit
         </button>
       </div>

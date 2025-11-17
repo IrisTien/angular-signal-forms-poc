@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SimpleUser } from '../model/user';
-import { form, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-convert-to-signal',
@@ -14,7 +12,8 @@ import { form, required } from '@angular/forms/signals';
   templateUrl: './convert-to-signal.component.html',
   styleUrls: ['./convert-to-signal.component.scss'],
 })
-export class ConvertToSingalComponent {
-  onSubmit() {
+export class ConvertToSignalComponent {
+  onSubmit(event: Event) {
+    event.preventDefault();
   }
 }

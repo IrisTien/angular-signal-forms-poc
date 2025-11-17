@@ -24,7 +24,8 @@ export class BasicSignalComponent {
     required(path.firstName, { message: 'First Name is required' });
   });
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     submit(this.userForm, (form: FieldTree<SimpleUser, string | number>) => {
       console.log('Submitted form data:', form().value());
       return lastValueFrom(of(undefined));

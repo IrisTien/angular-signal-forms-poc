@@ -12,7 +12,7 @@ export const routes: Routes = [
     // },
     {
         path: 'basic-signal',
-        loadComponent: () => import('./convert-to-signal/convert-to-signal.component').then(c => c.ConvertToSingalComponent)
+        loadComponent: () => import('./convert-to-signal/convert-to-signal.component').then(c => c.ConvertToSignalComponent)
     },
     {
         path: 'basic-traditional',

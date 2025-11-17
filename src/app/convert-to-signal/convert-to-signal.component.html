@@ -2,7 +2,7 @@
   <h1>Angular Signal Forms</h1>
 
   <div class="form-container">
-    <form class="user-form">
+    <form (submit)="onSubmit($event)" class="user-form">
       <h2>User Information Form</h2>
 
       <!-- First Name -->
@@ -15,7 +15,7 @@
       </div>
 
       <div class="form-actions">
-        <button type="button" class="submit-btn" (click)="onSubmit()">
+        <button type="submit" class="submit-btn">
           Submit
         </button>
       </div>
@@ -28,8 +28,14 @@
           <span [class]="userForm().valid() ? 'valid' : 'invalid'">
             {{ userForm().valid() ? 'Yes' : 'No' }}
           </span>
-        </div>
-        <div class="status-item">
+        </div> -->
+        <!-- <div class="status-item">
+          <strong>Form Submitting:</strong>
+          <span [class]="userForm().submitting() ? 'valid' : 'invalid'">
+            {{ userForm().submitting() ? 'Yes' : 'No' }}
+          </span>
+        </div> -->
+        <!-- <div class="status-item">
           <pre>{{ userForm().value() | json }}</pre>
         </div> -->
     </div>

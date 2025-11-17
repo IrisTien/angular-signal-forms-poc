@@ -36,89 +36,100 @@ const emailNotifiedSchema: Schema<User> = schema<User>((path) => {
   email(path.email, { message: 'Please enter a valid email' });
 });
 
+const ageSchema: Schema<number> = schema((path) => {
+  min(path, 18, { message: 'Age must be at least 18' });
+});
+
 const commonSchema: Schema<User> = schema<User>((path) => {
-  apply(path.firstName, nameSchema);
-  apply(path.lastName, nameSchema);
-  applyWhen(
-    path,
-    (ctx) => ctx.valueOf(path.notified) === true,
-    emailNotifiedSchema
-  );
-  disabled(path.email, (ctx) =>
-    ctx.valueOf(path.notified) === false
-      ? 'Email is not required when notified is disabled!'
-      : false
-  );
-  min(path.age, 18, { message: 'Age must be at least 18' });
-  applyEach(path.preferences, (path) => {
-    apply(path, nameSchema);
-  }),
-  apply(path.preferences, (path) => {
-    debounce(path, 2000);
-  }),
-  validate(path.preferences, (ctx) => {
-    const preferences = ctx.valueOf(path.preferences);
-    if (!preferences || preferences?.length === 0) {
-      return {
-        kind: 'custom',
-        message: 'At least one preference is required',
-      };
-    }
-    return null;
-  }),
-  apply(path.locationData, (location) => {
-    required(location.country, { message: 'Country is required' });
-    required(location.city, { message: 'City is required' });
-    disabled(location.city, (ctx) =>
-      ctx.valueOf(location.country) === 'USA'
-        ? 'City is not required for USA'
-        : false
-    );
-  }),
-  validateTree(path, (ctx) => {
-    const invalidName =
-      ctx.valueOf(path.firstName) === ctx.valueOf(path.lastName) &&
-      ctx.valueOf(path.firstName) !== '';
-    if (!invalidName) {
-      return null;
-    }
-    return {
-      kind: 'custom',
-      field: ctx.field.lastName,
-      message: 'First name and last name cannot be the same',
-    };
-  });
-  validateAsync(path.email, {
-    params: (ctx) => ({
-      value: ctx.value(),
-    }),
-    factory: (params) => {
-      return rxResource({
-        params,
-        stream: (p) => {
-          return validateEmailNotInUse(p.params.value);
-        },
-      });
-    },
-    onError: (result, ctx) => {
-      if (!result) {
-        return null;
-      }
-      return {
-        kind: 'custom',
-        field: ctx.field,
-        message: 'Email is already in use',
-      };
-    },
-    onSuccess: (result, ctx) => {
-      return null;
-    },
-  });
+  // apply(path.firstName, nameSchema);
+  // apply(path.lastName, nameSchema);
+  // apply(path.age, ageSchema);
+  // applyWhen(
+  //   path,
+  //   (ctx) => ctx.valueOf(path.notified) === true,
+  //   emailNotifiedSchema
+  // );
+  // disabled(path.email, (ctx) =>
+  //   ctx.valueOf(path.notified) === false
+  //     ? 'Email is not required when notified is disabled!'
+  //     : false
+  // );
+
+  // applyEach(path.preferences, (path) => {
+  //   apply(path, nameSchema);
+  // });
+
+  // validate(path.preferences, (ctx) => {
+  //   console.log('Validating preferences...');
+  //   const preferences = ctx.valueOf(path.preferences);
+  //   if (!preferences || preferences?.length === 0) {
+  //     return {
+  //       kind: 'custom',
+  //       message: 'At least one preference is required',
+  //     };
+  //   }
+  //   return null;
+  // });
+
+  // validateAsync(path.email, {
+  //   params: (ctx) => ({
+  //     value: ctx.value(),
+  //   }),
+  //   factory: (params) => {
+  //     return rxResource({
+  //       params,
+  //       stream: (p) => {
+  //         return validateEmailNotInUse(p.params.value);
+  //       },
+  //     });
+  //   },
+  //   onError: (result, ctx) => {
+  //     if (!result) {
+  //       return null;
+  //     }
+  //     return {
+  //       kind: 'custom',
+  //       field: ctx.field,
+  //       message: 'Email is already in use',
+  //     };
+  //   },
+  //   onSuccess: (result, ctx) => {
+  //     return null;
+  //   },
+  // });
+
+  // validateTree(path, (ctx) => {
+  //   const invalidName =
+  //     ctx.valueOf(path.firstName) === ctx.valueOf(path.lastName) &&
+  //     ctx.valueOf(path.firstName) !== '';
+  //   if (!invalidName) {
+  //     return null;
+  //   }
+  //   return {
+  //     kind: 'custom',
+  //     field: ctx.field.lastName,
+  //     message: 'First name and last name cannot be the same',
+  //   };
+  // });
+
+  // apply(path.preferences, (path) => {
+  //   debounce(path, 2000);
+  // });
+
+  // apply(path.locationData, (location) => {
+  //   required(location.country, { message: 'Country is required' });
+  //   required(location.city, { message: 'City is required' });
+  //   disabled(location.city, (ctx) =>
+  //     ctx.valueOf(location.country) === 'USA'
+  //       ? 'City is not required for USA'
+  //       : false
+  //   );
+  // });
 });
 
 function validateEmailNotInUse(email: string) {
   return of(email).pipe(
-    delay(200),
+    delay(500),
     map((email) => {
       if (email.endsWith('@test.com')) {
         throw new Error('Email is already in use');
@@ -157,7 +168,8 @@ export class SignalFormsPocComponent {
 
   newUserForm = form(this.user, commonSchema);
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     submit(this.newUserForm, (form) => {
       this.newUserForm().reset();
       return lastValueFrom(

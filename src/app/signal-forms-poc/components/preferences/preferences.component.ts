@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, WritableSignal } from '@angular/core';
+import { Component, computed, input, WritableSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Field, FieldTree } from '@angular/forms/signals';
-import { User } from '../../../model/user';
 
 @Component({
   selector: 'app-preferences',
@@ -13,26 +12,24 @@ import { User } from '../../../model/user';
 })
 export class PreferencesComponent {
   preferencesForm = input.required<FieldTree<string[], string>>();
-  user = input.required<WritableSignal<User>>();
+
+  preferences = computed(() => this.preferencesForm()().value);
 
   onTouched: Function = () => {};
 
   onChangeSubs: Function = () => {};
 
   addPreference() {
-    this.user().set({
-      ...this.user()(),
-      preferences: [...this.user()().preferences, ''],
-    });
+    this.preferences().set([
+      ...this.preferences()(),
+      ''
+    ]);
   }
 
   removePreference(index: number) {
-    const updatedPreferences = this.user()().preferences.filter(
+    const updatedPreferences = this.preferences()().filter(
       (_, i) => i !== index
     );
-    this.user().set({
-      ...this.user()(),
-      preferences: updatedPreferences,
-    });
+    this.preferences().set(updatedPreferences);
   }
 }

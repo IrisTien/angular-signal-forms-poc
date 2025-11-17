@@ -1,6 +1,6 @@
 <div class="form-group">
   <label>Preferences:</label>
-  @for (preference of user()().preferences; let i = $index; track $index) {
+  @for (preference of preferencesForm(); let i = $index; track $index) {
     <div class="preference-item">
       <div class="preference-input-item">
         <input
