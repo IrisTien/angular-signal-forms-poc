@@ -9,9 +9,17 @@
       <div class="form-group">
         <label for="firstName">First Name:</label>
         <input
+          [field]="userForm.firstName"
           id="firstName"
           type="text"
           placeholder="Enter your first name">
+        @if (userForm.firstName().touched()) {
+          @for (error of userForm.firstName().errors(); track error) {
+          <div class="error-message">
+            {{ error.message }}
+          </div>
+          }
+        }
       </div>
 
       <div class="form-actions">
@@ -23,21 +31,21 @@
   
     <div class="signal-status">
         <h3>Form Status</h3>
-        <!-- <div class="status-item">
+        <div class="status-item">
           <strong>Form Valid:</strong>
           <span [class]="userForm().valid() ? 'valid' : 'invalid'">
             {{ userForm().valid() ? 'Yes' : 'No' }}
           </span>
-        </div> -->
-        <!-- <div class="status-item">
+        </div>
+        <div class="status-item">
           <strong>Form Submitting:</strong>
           <span [class]="userForm().submitting() ? 'valid' : 'invalid'">
             {{ userForm().submitting() ? 'Yes' : 'No' }}
           </span>
-        </div> -->
-        <!-- <div class="status-item">
+        </div>
+        <div class="status-item">
           <pre>{{ userForm().value() | json }}</pre>
-        </div> -->
+        </div>
     </div>
   </div>
 </div>
